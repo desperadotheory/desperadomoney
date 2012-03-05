@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2009 (http://www.altova.com) by Client_id5131 (Client) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="contract" type="contractType">
+		<xs:annotation>
+			<xs:documentation>
+INTERNET-DRAFT: Ko Fujimura XML Voucher: Generic Voucher Language
+http://tools.ietf.org/html/draft-ietf-trade-voucher-lang-07
+Modified according: The Ricardian Financial Instrument Contract
+http://www.systemics.com/docs/ricardo/issuer/contract.html
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="contractType">
+		<xs:sequence>
+			<xs:element name="Title" type="xs:string"/>
+			<xs:element name="contractURL" type="xs:string" minOccurs="0"/>
+			<xs:element name="Total" type="xs:decimal">
+				<xs:annotation>
+					<xs:documentation>Total value of the emmission</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Currency">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="currencyName" type="xs:string"/>
+						<xs:element name="currencyLongName" type="xs:string" minOccurs="0"/>
+						<xs:element name="currencyLogo" type="xs:string" minOccurs="0"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ValidPeriod" type="ValidPeriodType"/>
+			<xs:element name="contractEan13Number" type="xs:string" minOccurs="0"/>
+			<xs:element name="Definitions" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The section [definitions] includes terms and definitions that generally desire to be defined in a contract. Following normal procedure in english common law contracts, this section goes up front.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:string">
+							<xs:attribute name="name"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Conditions" minOccurs="0" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:string">
+							<xs:attribute name="name"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Insula" type="RoleType" minOccurs="0"/>
+			<xs:element name="legalIssuer" type="shareType"/>
+			<xs:element name="Collector" type="RoleType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Merchandise" type="MerchandiseType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="vtsProvider" type="vtsProviderType" minOccurs="0"/>
+			<xs:element name="techIssuer" type="RoleType" minOccurs="0"/>
+			<xs:element name="key" type="KeyType" default="
+			- -----BEGIN CERTIFICATE-----
+			- -----END CERTIFICATE-----
+			" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RoleType" mixed="true">
+		<xs:sequence>
+			<xs:element name="name" type="xs:string" default="Name"/>
+			<xs:element name="long_name" type="xs:string" default="Long Name" minOccurs="0"/>
+			<xs:element name="address" type="xs:string" default="Address" minOccurs="0"/>
+			<xs:element name="country" type="xs:string" default="ISOaaNUTSxxx" minOccurs="0"/>
+			<xs:element name="email" type="xs:string" default="name@email.com" minOccurs="0"/>
+			<xs:element name="url" type="xs:string" default="http://myweb.com" minOccurs="0"/>
+			<xs:element name="logo" type="xs:string" default="http://mylogo.com" minOccurs="0"/>
+			<xs:element name="citizensID" type="xs:string" default="IDN-XXXXXXX-Y" minOccurs="0"/>
+			<xs:element name="BitCoinAddress" type="BitCoinAddressType" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="kind"/>
+	</xs:complexType>
+	<xs:complexType name="ValueType">
+		<xs:annotation>
+			<xs:documentation>
+ The [Ratio] element does not contain any contents.
+
+ The [Ratio] element has a "percentage" attribute that is used to specify the discount ratio of the price of the corresponding merchandize in percentage.			
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="percent" type="xs:decimal"/>
+			<xs:element name="resultingFixed" type="xs:decimal" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MerchandiseType" mixed="true">
+		<xs:annotation>
+			<xs:documentation>
+The [Merchandise] element may contain any elements used to specify or restrict the goods or services rendered when the voucher is redeemed.
+The sub-elements contained in this element are depending on the application of the voucher and are left to the other domain-specific specifications. Domain-specific elements can be extended as sub-elements using [XML-ns]. 
+This element is intended to be interpreted by a collecting system. 
+ An implementation of a wallet system does not have to use this element. Any restrictions applied should also be described in the [Description] element or the [Conditions] elements in natural language form to enable users to check the restrictions.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="included" type="xs:boolean" default="true"/>
+				<xs:attribute name="pictureURL" type="xs:string"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="ValidPeriodType">
+		<xs:sequence>
+			<xs:element name="start" type="xs:dateTime"/>
+			<xs:element name="end" type="xs:dateTime"/>
+			<xs:element name="issueDate" type="xs:date"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="KeyType">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="name" type="xs:string"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="vtsProviderType">
+		<xs:sequence>
+			<xs:element name="provider" type="RoleType"/>
+			<xs:element name="vtsVersion" type="xs:string"/>
+			<xs:element name="vtsProcessType" default="monetary">
+				<xs:annotation>
+					<xs:documentation>The following identifiers are defined for the ProcessType
+
+Exchange: Items specified in the [Merchandise] element can be claimed in exchange for the voucher. If this type is selected, neither [Ratio] nor [Fixed] element MUST be specified. Note that this value process type has the same meaning as:
+     [Value type="discount"][Ratio percentage="100"/][/Value]
+
+Discount: Items specified in the [Merchandise] element can be purchased at the discount price calculated by the [Ratio] or
+     [Fixed] element.
+
+Monetary: Items specified in the [Merchandise] element can be purchased using the value of the voucher. (Note: if the [Merchandise] element is not specified, the voucher can be used for any purchase.) If this type is selected, the [Fixed] element MUST be specified.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="exchange"/>
+						<xs:enumeration value="discount"/>
+						<xs:enumeration value="monetary"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="shareType">
+		<xs:sequence>
+			<xs:element name="number" type="xs:string"/>
+			<xs:element name="holder" type="RoleType"/>
+			<xs:element name="share" type="ValueType"/>
+			<xs:element name="participation" type="shareType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BitCoinAddressType">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="privateKey"/>
+				<xs:attribute name="QR" type="xs:anyURI"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+</xs:schema>
