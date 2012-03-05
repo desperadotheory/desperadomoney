@@ -1,0 +1,67 @@
+
+body {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+}
+
+
+h1 {font-size: 16px; color: rgb(7,124,177); background-color: rgb(212,227,241); width="300";}
+h2 {font-size: 14px; color: rgb(7,124,177); background-color: rgb(212,227,241); width="300";}
+h3 {font-size: 12px; color: rgb(7,124,177); background-color: rgb(212,227,241); width="300";}
+h4 {font-size: 12px;}
+p {font-size: 10px;}
+b {color: rgb(7,124,177); font-weight: bold }
+
+
+
+.ntable {
+	border: 1px outset white;
+	cellpadding: 1px;
+	cellspacing: 1px;
+}
+.ntable td {
+	font-size: 12px;
+	margin: 1px;
+	padding: 1px;
+	horizontal-align: left;
+	vertical-align: top;
+	border: 1px;
+}
+
+.btable {
+	border: 1px;
+	cellpadding: 1px;
+	cellspacing: 1px;
+	width: 700px; 
+	background-color: white;
+}
+
+.red {color: red; }
+.brown {color: brown; }
+
+.small {font-size: 9px;}
+.row  {display: table-row; }
+.cell {display: table-cell; }
+.vlong {width: 50em;}
+.long {width: 30em;}
+.plus { width: 20em; }
+.middle  { width: 10em; }
+.short { width: 6em; }
+.vshort {width: 5em; }
+.redbold {color: red; font-weight: bold; font-size: 25px;}
+
+.grid { width: 700px; border-collapse: collapse; width: 95%; margin-left: 1em; margin-right: 1em }
+.grid th { font-size: 12px; color:rgb(7,124,177); background-color: rgb(212,227,241); text-align: left; padding: .3em; border: 1px solid rgb(7,124,177); vertical-align: top  }
+.grid td { font-size: 12px; padding: .3em; border: 1px solid rgb(7,124,177); margin: 0; cursor: pointer; vertical-align: top }
+
+
+.gridlab { width: 700px; border-collapse: collapse; width: 95%; margin-left: 1em; margin-right: 1em }
+.gridlab th { font-size: 12px; background-color: rgb(212,227,241); text-align: center; border: 1px solid rgb(7,124,177) }
+.gridlab td { font-size: 12px; border: 1px solid rgb(7,124,177); margin-bottom: 2px; cursor: pointer; vertical-align: top }
+
+
+.gridnmx { border-collapse: collapse; margin-left: 1em; margin-right: 1em }
+.gridnmx th { font-size: 12px; background-color: rgb(212,227,241); text-align: center; border: 1px solid rgb(7,124,177) }
+.gridnmx td { font-size: 12px; border: 1px solid rgb(7,124,177); margin-bottom: 2px; cursor: pointer; vertical-align: top }
+
+
